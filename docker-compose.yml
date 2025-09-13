@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+
+  # MySQL Database Service
+  mysql:
+    image: mysql:8.0
+    container_name: moviesapp-db
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: moviesapp_db
+      MYSQL_USER: moviesapp_user
+      MYSQL_PASSWORD: moviesapp_pass
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # Spring Boot App Service
+#  app:
+#    image: your-spring-boot-app:latest  # Replace with your image name
+#    container_name: moviesapp-api
+#    build:
+#      context: .
+#      dockerfile: Dockerfile  # Optional, if you have a custom Dockerfile
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - mysql
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/moviesdb
+#      SPRING_DATASOURCE_USERNAME: moviesuser
+#      SPRING_DATASOURCE_PASSWORD: moviespass
+#      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+#      SPRING_LIQUIBASE_CHANGE_LOG: classpath:db/changelog/db.changelog-master.yaml
+#    networks:
+#      - movies-net
+
+volumes:
+  mysql_data:
