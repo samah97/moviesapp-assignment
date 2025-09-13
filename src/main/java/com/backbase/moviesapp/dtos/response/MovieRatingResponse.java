@@ -2,15 +2,15 @@ package com.backbase.moviesapp.dtos.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public record MovieResponse(
+public record MovieRatingResponse(
         String imdbId,
         String movieName,
         String year,
-        Boolean hasWon,
-        List<String> winnerYears
+        BigDecimal rating,
+        String boxOfficeValue
 ) {
 }

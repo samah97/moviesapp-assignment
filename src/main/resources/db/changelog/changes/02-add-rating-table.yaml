@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: samah
+      changes:
+        - createTable:
+            tableName: rating
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: imdb_id
+                  type: varchar(20)
+                  autoIncrement: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: score
+                  type: decimal(3,1)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: datetime
+                  type: datetime
+                  constraints:
+                    nullable: false
