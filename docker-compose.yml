@@ -14,7 +14,7 @@ services:
       - spring.datasource.url=jdbc:mysql://mysqldb:3306/moviesapp_db?allowPublicKeyRetrieval=true&useSSL=false
       - DB_USER=moviesapp_user
       - DB_PASSWORD=moviesapp_pass
-      - OMDB_API_KEY=89946f43
+      - OMDB_API_KEY=
       - APP_API_TOKEN=4ALI0J029mH6kJJI0rPxUFDfVCR
     depends_on:
       - mysqldb
