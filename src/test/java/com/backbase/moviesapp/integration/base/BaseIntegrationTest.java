@@ -22,7 +22,7 @@ public abstract class BaseIntegrationTest {
 
     @Container
     protected static final MySQLContainer<?> mysql =
-            new MySQLContainer<>("mysql:8.0")
+            new MySQLContainer<>("mysql:9.2.0")
                     .withDatabaseName("moviesapp_db")
                     .withUsername("test")
                     .withPassword("test");

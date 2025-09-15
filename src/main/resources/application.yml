@@ -1,8 +1,15 @@
+server:
+  port: 8080
+
+app:
+  api:
+    token: 4ALI0J029mH6kJJI0rPxUFDfVCR
+
 spring:
   application:
     name: movies-app
   datasource:
-    url: jdbc:mysql://localhost:3306/${DB_NAME}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/moviesapp_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: ${DB_USER}
     password: ${DB_PASSWORD}
   jpa:
@@ -11,6 +18,9 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
+  data:
+    rest:
+      base-path: /api
 
 
 award-winnings-file: csv/academy_awards.csv
@@ -19,3 +29,11 @@ omdb:
   api:
     key: ${OMDB_API_KEY}
     base-url: http://www.omdbapi.com/
+
+
+springdoc:
+  api-docs:
+    path: /api-docs
+
+  swagger-ui:
+    operationsSorter: method

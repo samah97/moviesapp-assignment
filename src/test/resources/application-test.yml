@@ -1,3 +1,7 @@
+app:
+  api:
+    token: test-token
+
 omdb:
   api:
     key: "4194723"

@@ -6,8 +6,10 @@ import com.backbase.moviesapp.dtos.response.MovieResponse;
 import com.backbase.moviesapp.exceptions.MovieNotFoundException;
 import com.backbase.moviesapp.fakers.MovieRatingResponseFaker;
 import com.backbase.moviesapp.fakers.MovieResponseFaker;
+import com.backbase.moviesapp.interceptors.APITokenInterceptor;
 import com.backbase.moviesapp.services.MoviesService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +38,16 @@ class MoviesControllerTest {
     @MockitoBean
     private MoviesService moviesService;
 
+    @MockitoBean
+    private APITokenInterceptor apiTokenInterceptor;
+
     @Autowired
     private ObjectMapper objectMapper;
+
+    @BeforeEach
+    void setup() {
+        when(apiTokenInterceptor.preHandle(any(), any(), any())).thenReturn(true);
+    }
 
     @DisplayName("Test Controller Movie Won Movie")
     @Test
@@ -50,7 +60,7 @@ class MoviesControllerTest {
         when(moviesService.isWinner(category, movieName)).thenReturn(movieResponse);
 
         mockMvc.perform(
-                        get("/movies/winner")
+                        get("/api/movies/winner")
                                 .param("category", category)
                                 .param("movie", movieName)
                 )
@@ -69,7 +79,7 @@ class MoviesControllerTest {
         when(moviesService.isWinner(category, movieName)).thenThrow(MovieNotFoundException.class);
 
         mockMvc.perform(
-                        get("/movies/winner")
+                        get("/api/movies/winner")
                                 .param("category", category)
                                 .param("movie", movieName)
                 )
@@ -80,7 +90,7 @@ class MoviesControllerTest {
     void rateMovie_shouldReturnAccepted() throws Exception {
         RateMovieRequest request = new RateMovieRequest("Inception", new BigDecimal(5));
 
-        mockMvc.perform(post("/movies/rate")
+        mockMvc.perform(post("/api/movies/rate")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isAccepted());
@@ -97,7 +107,7 @@ class MoviesControllerTest {
 
         when(moviesService.topRated()).thenReturn(movieRatingResponses);
 
-        mockMvc.perform(get("/movies/top-rated"))
+        mockMvc.perform(get("/api/movies/top-rated"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(movieRatingResponses.size()))
                 .andExpect(jsonPath("$[0].title").value(movieRatingResponses.get(0).title()))

@@ -63,7 +63,7 @@ public class AwardsIngestionService implements ApplicationRunner {
         try (InputStream is = resource.getInputStream()) {
             newChecksum = ChecksumUtility.computeChecksum(is);
         }
-        if (fileIsNew(newChecksum)) {
+        if (shouldLoadData(newChecksum)) {
             List<AcademyAwardCSV> academyAwardCSV = CSVMapper.csvToModelMapper(resource.getInputStream(), AcademyAwardCSV.class);
 
             List<AcademyAward> academyAwardList = academyAwardCSV.stream()
@@ -73,6 +73,11 @@ public class AwardsIngestionService implements ApplicationRunner {
             updateNewChecksum(newChecksum);
             log.info("CSV Data saved successfully");
         }
+    }
+
+    private boolean shouldLoadData(String newChecksum) {
+        return academyAwardService.countAwards() == 0 ||
+                fileIsNew(newChecksum);
     }
 
     private void updateNewChecksum(String checkSum) {

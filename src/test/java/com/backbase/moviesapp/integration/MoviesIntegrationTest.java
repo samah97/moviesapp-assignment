@@ -35,6 +35,9 @@ class MoviesIntegrationTest extends BaseIntegrationTest {
     @Autowired
     private RatingRepository ratingRepository;
 
+    private static final String TEST_API_TOKEN = "test-token";
+    private static final String API_TOKEN_HEADER = "X-API-TOKEN";
+
     @Test
     void shouldReturnWinnerResponse() throws Exception {
         String movieTitle = "Inception";
@@ -50,7 +53,8 @@ class MoviesIntegrationTest extends BaseIntegrationTest {
         AcademyAward academyAward = AcademyAwardFaker.createAward(category, movieTitle, true);
         academyAwardService.save(academyAward);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/movies/winner")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/movies/winner")
+                        .header(API_TOKEN_HEADER, TEST_API_TOKEN)
                         .param("category", category)
                         .param("movie", movieTitle))
                 .andExpect(status().isOk())
@@ -102,7 +106,8 @@ class MoviesIntegrationTest extends BaseIntegrationTest {
                 }
                 """.formatted(imdbId, score);
         mockMvc.perform(
-                        MockMvcRequestBuilders.post("/movies/rate")
+                        MockMvcRequestBuilders.post("/api/movies/rate")
+                                .header(API_TOKEN_HEADER, TEST_API_TOKEN)
                                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                                 .content(rateMovieRequest)
                 )

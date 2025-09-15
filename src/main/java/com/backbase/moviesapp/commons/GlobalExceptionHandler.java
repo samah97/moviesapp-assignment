@@ -1,7 +1,8 @@
-package com.backbase.moviesapp;
+package com.backbase.moviesapp.commons;
 
 import com.backbase.moviesapp.dtos.response.ErrorResponse;
 import com.backbase.moviesapp.exceptions.MovieNotFoundException;
+import com.backbase.moviesapp.exceptions.UnAuthorizedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -93,7 +94,16 @@ public class GlobalExceptionHandler {
                 e.getMessage()
         );
     }
-    
+
+    @ExceptionHandler(UnAuthorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorResponse handleUnAuthorizedException(UnAuthorizedException e) {
+        log.error(e.getMessage(), e);
+        return new ErrorResponse(
+                HttpStatus.UNAUTHORIZED.name(),
+                e.getMessage()
+        );
+    }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

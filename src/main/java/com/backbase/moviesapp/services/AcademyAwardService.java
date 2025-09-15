@@ -55,4 +55,8 @@ public class AcademyAwardService {
         return academyAwardsRepository.findAllByCategoryAndNomineeAndHasWonTrue(category, movieName);
     }
 
+    public long countAwards() {
+        return academyAwardsRepository.count();
+    }
+
 }
