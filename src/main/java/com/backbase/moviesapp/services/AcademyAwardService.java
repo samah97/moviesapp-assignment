@@ -22,6 +22,10 @@ public class AcademyAwardService {
     private static final int BATCH_SIZE = 500;
 
 
+    public AcademyAward save(AcademyAward academyAward) {
+        return academyAwardsRepository.save(academyAward);
+    }
+
     @Transactional
     public void clearAndSave(List<AcademyAward> academyAwardList) {
         academyAwardsRepository.deleteAll();

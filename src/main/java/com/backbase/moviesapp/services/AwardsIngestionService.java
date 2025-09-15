@@ -12,6 +12,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,7 @@ import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
+@Profile("!test")
 @Component
 public class AwardsIngestionService implements ApplicationRunner {
 
@@ -47,7 +49,7 @@ public class AwardsIngestionService implements ApplicationRunner {
 
 
     @Override
-    public void run(ApplicationArguments args){
+    public void run(ApplicationArguments args) {
         try {
             loadCSVData();
         } catch (IOException e) {
@@ -56,13 +58,13 @@ public class AwardsIngestionService implements ApplicationRunner {
     }
 
     private void loadCSVData() throws IOException {
-        Resource resource = resourceLoader.getResource("classpath:"+fileName);
+        Resource resource = resourceLoader.getResource("classpath:" + fileName);
         String newChecksum;
         try (InputStream is = resource.getInputStream()) {
             newChecksum = ChecksumUtility.computeChecksum(is);
         }
-        if(fileIsNew(newChecksum)){
-            List<AcademyAwardCSV> academyAwardCSV =  CSVMapper.csvToModelMapper(resource.getInputStream(), AcademyAwardCSV.class);
+        if (fileIsNew(newChecksum)) {
+            List<AcademyAwardCSV> academyAwardCSV = CSVMapper.csvToModelMapper(resource.getInputStream(), AcademyAwardCSV.class);
 
             List<AcademyAward> academyAwardList = academyAwardCSV.stream()
                     .map(academyAwardMapper::mapCSVToDomain)
@@ -85,16 +87,16 @@ public class AwardsIngestionService implements ApplicationRunner {
 
     private boolean fileIsNew(String newCheckSum) {
         String latestChecksum = getLatestChecksum();
-        return ! newCheckSum.equals(latestChecksum);
+        return !newCheckSum.equals(latestChecksum);
     }
 
-    private String getLatestChecksum(){
-        Resource resource = resourceLoader.getResource("classpath:"+checksumFileName);
+    private String getLatestChecksum() {
+        Resource resource = resourceLoader.getResource("classpath:" + checksumFileName);
         try {
-            return  resource.exists()? resource.getContentAsString(Charset.defaultCharset()): Strings.EMPTY;
+            return resource.exists() ? resource.getContentAsString(Charset.defaultCharset()) : Strings.EMPTY;
         } catch (IOException e) {
             log.warn("Failed to read checksum file, assuming new file. {}", e.getMessage());
-            return  Strings.EMPTY;
+            return Strings.EMPTY;
         }
     }
 }

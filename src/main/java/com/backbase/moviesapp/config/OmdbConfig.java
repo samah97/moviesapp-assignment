@@ -9,6 +9,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 
+import static com.backbase.moviesapp.constants.OMDBConstants.API_KEY_PARAM;
+
 @Configuration
 public class OmdbConfig {
 
@@ -17,7 +19,6 @@ public class OmdbConfig {
 
     @Value("${omdb.api.base-url:https://www.omdbapi.com/}")
     public String baseUrl;
-    private static final String API_KEY_PARAM = "apikey";
 
 
     @Bean

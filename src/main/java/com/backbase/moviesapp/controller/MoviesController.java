@@ -37,6 +37,4 @@ public class MoviesController {
     public ResponseEntity<List<MovieRatingResponse>> topRated() {
         return ResponseEntity.ok(moviesService.topRated());
     }
-
-
 }

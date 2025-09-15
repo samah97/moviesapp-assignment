@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public record MovieRatingResponse(
         String imdbId,
-        String movieName,
+        String title,
         String year,
         BigDecimal rating,
         String boxOfficeValue

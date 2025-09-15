@@ -5,6 +5,7 @@ import com.backbase.moviesapp.dtos.TopRatedMovies;
 import com.backbase.moviesapp.dtos.request.RateMovieRequest;
 import com.backbase.moviesapp.dtos.response.MovieRatingResponse;
 import com.backbase.moviesapp.dtos.response.MovieResponse;
+import com.backbase.moviesapp.dtos.response.omdb.OmdbGetMovieResponse;
 import com.backbase.moviesapp.utils.MovieUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,43 +26,46 @@ public class MoviesService {
     private final RatingService ratingService;
 
     public MovieResponse isWinner(String category, String movieName) {
-        return omdbService.fetchByTitle(movieName)
-                .map(omdbResponse -> {
-                    List<AcademyAward> academyAwardList = academyAwardService.findWinnersByCategoryAndNominee(category, omdbResponse.Title());
-                    boolean hasWon = !academyAwardList.isEmpty();
-                    List<String> winnerYears = hasWon ?
-                            academyAwardList.stream().map(AcademyAward::getYear).toList()
-                            : List.of();
-                    return new MovieResponse(omdbResponse.imdbID(), omdbResponse.Title(), omdbResponse.Year(), hasWon, winnerYears);
-                }).block();
+        OmdbGetMovieResponse omdb = omdbService.fetchByTitle(movieName);
+        List<AcademyAward> academyAwardList = academyAwardService.findWinnersByCategoryAndNominee(category, omdb.Title());
+
+        boolean hasWon = !academyAwardList.isEmpty();
+        List<String> winnerYears = academyAwardList.stream()
+                .map(AcademyAward::getYear)
+                .toList();
+
+        return new MovieResponse(
+                omdb.imdbID(),
+                omdb.Title(),
+                omdb.Year(),
+                hasWon,
+                winnerYears
+        );
     }
 
     public void rateMovie(RateMovieRequest request) {
-        omdbService.fetchById(request.imdbId()).blockOptional()
-                .ifPresent(imdbResponse ->
-                        ratingService.rateMovie(request.imdbId(), request.score())
-                );
+        omdbService.fetchById(request.imdbId()); // If movie is not found, exception will be thrown
+        ratingService.rateMovie(request.imdbId(), request.score());
     }
 
     public List<MovieRatingResponse> topRated() {
-        log.info("Getting Top Rated movies");
         List<TopRatedMovies> topRatedMovies = ratingService.getTopRatedMovies();
-        log.info("Top Rated movie = " + topRatedMovies.size());
+
         return topRatedMovies.stream()
-                .map(tpm ->
-                        omdbService.fetchById(tpm.imdbId())
-                                .map(omdbResponse ->
-                                        new MovieRatingResponse(
-                                                omdbResponse.imdbID(),
-                                                omdbResponse.Title(),
-                                                omdbResponse.Year(),
-                                                BigDecimal.valueOf(tpm.avgScore())
-                                                        .setScale(1, RoundingMode.HALF_UP),
-                                                omdbResponse.BoxOffice()
-                                        ))
-                                .block()
+                .map(tpm -> {
+                    var omdb = omdbService.fetchById(tpm.imdbId());
+                    return new MovieRatingResponse(
+                            omdb.imdbID(),
+                            omdb.Title(),
+                            omdb.Year(),
+                            BigDecimal.valueOf(tpm.avgScore())
+                                    .setScale(1, RoundingMode.HALF_UP),
+                            omdb.BoxOffice()
+                    );
+                })
+                .sorted(Comparator.comparing((MovieRatingResponse r) -> MovieUtils.parseBoxOffice(r.boxOfficeValue()))
+                        .reversed()
                 )
-                .sorted(Comparator.comparing((MovieRatingResponse movieRatingResponse) -> movieRatingResponse != null ? MovieUtils.parseBoxOffice(movieRatingResponse.boxOfficeValue()) : BigDecimal.ZERO).reversed())
                 .toList();
     }
 }

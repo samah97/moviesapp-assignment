@@ -19,51 +19,45 @@ public class OmdbService {
 
     private final WebClient omdbWebClient;
 
-
-    public Mono<OmdbGetMovieResponse> fetchByTitle(String movieTitle) {
-        return omdbWebClient.get()
+    private OmdbGetMovieResponse fetchMovie(String queryParamName, String queryParamValue) {
+        var response = omdbWebClient.get()
                 .uri(uriBuilder ->
                         uriBuilder
-                                .queryParam(TITLE_PARAM, movieTitle)
+                                .queryParam(queryParamName, queryParamValue)
                                 .build()
                 )
                 .retrieve()
-                .onStatus(HttpStatusCode::is5xxServerError, response ->
-                        response.bodyToMono(String.class)
+                .onStatus(HttpStatusCode::is5xxServerError, errorResponse ->
+                        errorResponse.bodyToMono(String.class)
                                 .flatMap(body -> Mono.error(new APIException("Error calling OMDB API " + body)))
                 )
                 .bodyToMono(OmdbGetMovieResponse.class)
-                .flatMap(this::handleResponse);
+                .block();
+
+        return handleResponse(response);
     }
 
-    public Mono<OmdbGetMovieResponse> fetchById(String imdbId) {
-        return omdbWebClient.get()
-                .uri(uriBuilder ->
-                        uriBuilder
-                                .queryParam(IMDB_ID_PARAM, imdbId)
-                                .build()
-                )
-                .retrieve()
-                .onStatus(HttpStatusCode::is5xxServerError, response ->
-                        response.bodyToMono(String.class)
-                                .flatMap(body -> Mono.error(new APIException("Error calling OMDB API " + body)))
-                )
-                .bodyToMono(OmdbGetMovieResponse.class)
-                .flatMap(this::handleResponse);
+    public OmdbGetMovieResponse fetchByTitle(String movieTitle) {
+        return fetchMovie(TITLE_PARAM, movieTitle);
     }
 
-    private Mono<OmdbGetMovieResponse> handleResponse(OmdbGetMovieResponse response) {
+    public OmdbGetMovieResponse fetchById(String imdbId) {
+        return fetchMovie(IMDB_ID_PARAM, imdbId);
+    }
+
+    private OmdbGetMovieResponse handleResponse(OmdbGetMovieResponse response) {
+        if (response == null) {
+            throw new APIException("OMDb returned null response");
+        }
         if (FALSE_RESPONSE.equalsIgnoreCase(response.Response())) {
-            log.error("Error calling OMDB API {}", response.Error());
+            log.error("OMDB API Error {}", response.Error());
             if (MOVIE_NOT_FOUND_RESP.equalsIgnoreCase(response.Error()) ||
                     INCORRECT_ID_RESP.equalsIgnoreCase(response.Error())
             ) {
-                return Mono.error(new MovieNotFoundException("Movie not found!"));
+                throw new MovieNotFoundException("Movie not found!");
             }
-            return Mono.error(new APIException("API Error:" + response.Error()));
+            throw new APIException("API Error:" + response.Error());
         }
-        return Mono.just(response);
+        return response;
     }
-
-
 }
