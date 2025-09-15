@@ -1,0 +1,326 @@
+{
+	"info": {
+		"_postman_id": "c85dec17-b3be-47c7-9350-d58f905aba49",
+		"name": "MoviesApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8153909"
+	},
+	"item": [
+		{
+			"name": "omdb",
+			"item": [
+				{
+					"name": "Get Movie By Title",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{omdbHost}}?apikey={{omdbAPIKey}}&t=Fox",
+							"host": [
+								"{{omdbHost}}"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "{{omdbAPIKey}}"
+								},
+								{
+									"key": "t",
+									"value": "Fox"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Movie By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{omdbHost}}?apikey={{omdbAPIKey}}&i=",
+							"host": [
+								"{{omdbHost}}"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "{{omdbAPIKey}}"
+								},
+								{
+									"key": "i",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Winner",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-TOKEN",
+						"value": "4ALI0J029mH6kJJI0rPxUFDfVCR",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/movies/winner?category=Best Picture&movie=UnkownMovie",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"movies",
+						"winner"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Best Picture"
+						},
+						{
+							"key": "movie",
+							"value": "UnkownMovie"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Driving Miss Daisy (Winner)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-TOKEN",
+								"value": "4ALI0J029mH6kJJI0rPxUFDfVCR",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/movies/winner?category=Best Picture&movie=Driving Miss Daisy",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"winner"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Best Picture"
+								},
+								{
+									"key": "movie",
+									"value": "Driving Miss Daisy"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 15 Sep 2025 20:15:37 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"imdbId\": \"tt0097239\",\n    \"title\": \"Driving Miss Daisy\",\n    \"year\": \"1989\",\n    \"hasWon\": true,\n    \"winnerYears\": [\n        \"1989 (62nd)\"\n    ]\n}"
+				},
+				{
+					"name": "Movie Not Found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-TOKEN",
+								"value": "4ALI0J029mH6kJJI0rPxUFDfVCR",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/movies/winner?category=Best Picture&movie=UnkownMovie",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"winner"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Best Picture"
+								},
+								{
+									"key": "movie",
+									"value": "UnkownMovie"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 15 Sep 2025 20:25:39 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"Not Found\",\n    \"message\": \"Movie not found!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Rate Movie",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-API-TOKEN",
+						"value": "4ALI0J029mH6kJJI0rPxUFDfVCR",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"imdbId\":\"tt0097239\",\n    \"score\":10.0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/movies/rate",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"movies",
+						"rate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Top Rated",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-TOKEN",
+						"value": "4ALI0J029mH6kJJI0rPxUFDfVCR",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/movies/top-rated",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"movies",
+						"top-rated"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Top Rated",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-TOKEN",
+								"value": "4ALI0J029mH6kJJI0rPxUFDfVCR",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/movies/top-rated",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"top-rated"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 15 Sep 2025 20:24:38 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"imdbId\": \"tt0099785\",\n        \"title\": \"Home Alone\",\n        \"year\": \"1990\",\n        \"rating\": 2.6,\n        \"boxOfficeValue\": \"$285,761,243\"\n    },\n    {\n        \"imdbId\": \"tt0099348\",\n        \"title\": \"Dances with Wolves\",\n        \"year\": \"1990\",\n        \"rating\": 10,\n        \"boxOfficeValue\": \"$184,208,848\"\n    },\n    {\n        \"imdbId\": \"tt0097239\",\n        \"title\": \"Driving Miss Daisy\",\n        \"year\": \"1989\",\n        \"rating\": 10,\n        \"boxOfficeValue\": \"$106,593,296\"\n    },\n    {\n        \"imdbId\": \"tt0462499\",\n        \"title\": \"Rambo\",\n        \"year\": \"2008\",\n        \"rating\": 5,\n        \"boxOfficeValue\": \"$42,754,105\"\n    }\n]"
+				}
+			]
+		}
+	]
+}
