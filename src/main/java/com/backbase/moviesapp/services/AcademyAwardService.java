@@ -4,10 +4,10 @@ import com.backbase.moviesapp.domain.AcademyAward;
 import com.backbase.moviesapp.repository.AcademyAwardsRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class AcademyAwardService {
 
     @Transactional
     public void clearAndSave(List<AcademyAward> academyAwardList) {
-        academyAwardsRepository.deleteAll();
+        academyAwardsRepository.deleteAllInBatch();
         entityManager.flush();
         saveAllInBatch(academyAwardList);
     }
