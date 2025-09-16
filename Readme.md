@@ -21,43 +21,35 @@ team.
 
 ### Tech Stack
 
+## 🚀 Tech Stack
+
 <p align="center">
-  <figure>
-    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="60" alt="Java"/>
-    <figcaption>Java 17</figcaption>
-  </figure>
-  <figure>
-    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="60" alt="Spring Boot"/>
-    <figcaption>Spring Boot 3</figcaption>
-  </figure>
-  <figure>
-    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="60" alt="MySQL"/>
-    <figcaption>MySQL</figcaption>
-  </figure>
-  <figure>
-    <img src="https://avatars.githubusercontent.com/u/790012?s=200&v=4" width="60" alt="Liquibase"/>
-    <figcaption>Liquibase</figcaption>
-  </figure>
-  <figure>
-    <img src="https://mapstruct.org/images/mapstruct.png" width="60" alt="MapStruct"/>
-    <figcaption>MapStruct</figcaption>
-  </figure>
-  <figure>
-    <img src="https://raw.githubusercontent.com/projectlombok/projectlombok.org/master/assets/logo.png" width="60" alt="Lombok"/>
-    <figcaption>Lombok</figcaption>
-  </figure>
-  <figure>
-    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maven/maven-original.svg" width="60" alt="Maven"/>
-    <figcaption>Maven</figcaption>
-  </figure>
-  <figure>
-    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" width="60" alt="Hibernate"/>
-    <figcaption>Hibernate</figcaption>
-  </figure>
-  <figure>
-    <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" width="60" alt="Postman"/>
-    <figcaption>Postman</figcaption>
-  </figure>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="60" alt="Java"/><br/>
+  <sub>Java 17</sub>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="60" alt="Spring Boot"/><br/>
+  <sub>Spring Boot 3</sub>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="60" alt="MySQL"/><br/>
+  <sub>MySQL</sub>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://avatars.githubusercontent.com/u/790012?s=200&v=4" width="60" alt="Liquibase"/><br/>
+  <sub>Liquibase</sub>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://mapstruct.org/images/mapstruct-logo.png" width="60" alt="MapStruct"/><br/>
+  <sub>MapStruct</sub>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://avatars.githubusercontent.com/u/45949248?s=200&v=4" width="60" alt="Lombok"/><br/>
+  <sub>Lombok</sub>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maven/maven-original.svg" width="60" alt="Maven"/><br/>
+  <sub>Maven</sub>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" width="60" alt="Hibernate"/><br/>
+  <sub>Hibernate</sub>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" width="60" alt="Postman"/><br/>
+  <sub>Postman</sub>
 </p>
 
 ### Looking forward to join the TEAM! 
