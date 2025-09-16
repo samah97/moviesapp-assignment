@@ -24,32 +24,15 @@ team.
 ## 🚀 Tech Stack
 
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="60" alt="Java"/><br/>
-  <sub>Java 17</sub>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="60" alt="Spring Boot"/><br/>
-  <sub>Spring Boot 3</sub>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="60" alt="MySQL"/><br/>
-  <sub>MySQL</sub>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://avatars.githubusercontent.com/u/790012?s=200&v=4" width="60" alt="Liquibase"/><br/>
-  <sub>Liquibase</sub>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://mapstruct.org/images/mapstruct-logo.png" width="60" alt="MapStruct"/><br/>
-  <sub>MapStruct</sub>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://avatars.githubusercontent.com/u/45949248?s=200&v=4" width="60" alt="Lombok"/><br/>
-  <sub>Lombok</sub>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maven/maven-original.svg" width="60" alt="Maven"/><br/>
-  <sub>Maven</sub>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" width="60" alt="Hibernate"/><br/>
-  <sub>Hibernate</sub>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" width="60" alt="Postman"/><br/>
-  <sub>Postman</sub>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="60" alt="Java 17"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="60" alt="Spring Boot 3"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="60" alt="MySQL"/>
+  <img src="https://avatars.githubusercontent.com/u/790012?s=200&v=4" width="60" alt="Liquibase"/>
+  <img src="https://mapstruct.org/images/mapstruct.png" width="60" alt="MapStruct"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lombok/lombok-plain.svg" width="60" alt="Lombok"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maven/maven-original.svg" width="60" alt="Maven"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" width="60" alt="Hibernate"/>
+  <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" width="60" alt="Postman"/>
 </p>
 
 ### Looking forward to join the TEAM! 
