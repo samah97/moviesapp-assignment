@@ -24,8 +24,12 @@ public class MoviesService {
     private final AcademyAwardService academyAwardService;
     private final OmdbService omdbService;
     private final RatingService ratingService;
+    private static final String DEFAULT_CATEGORY = "Best Picture";
 
     public MovieResponse isWinner(String category, String movieName) {
+        if (category == null || category.isEmpty()) {
+            category = DEFAULT_CATEGORY;
+        }
         OmdbGetMovieResponse omdb = omdbService.fetchByTitle(movieName);
         List<AcademyAward> academyAwardList = academyAwardService.findWinnersByCategoryAndNominee(category, omdb.Title());
 

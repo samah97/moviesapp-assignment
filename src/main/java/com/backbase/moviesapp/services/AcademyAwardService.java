@@ -29,17 +29,22 @@ public class AcademyAwardService {
     @Transactional
     public void clearAndSave(List<AcademyAward> academyAwardList) {
         academyAwardsRepository.deleteAll();
+        entityManager.flush();
         saveAllInBatch(academyAwardList);
     }
 
 
-    public void saveAllInBatch(List<AcademyAward> awards) {
+    private void saveAllInBatch(List<AcademyAward> awards) {
+        if (awards.isEmpty()) {
+            log.info("No awards to save");
+            return;
+        }
         log.info("Starting batch insert of {} awards", awards.size());
-
+        long startTime = System.currentTimeMillis();
         for (int i = 0; i < awards.size(); i++) {
             entityManager.persist(awards.get(i));
 
-            if (i > 0 && i % BATCH_SIZE == 0) {
+            if ((i + 1) % BATCH_SIZE == 0) {
                 entityManager.flush();
                 entityManager.clear();
             }
@@ -48,7 +53,8 @@ public class AcademyAwardService {
         entityManager.flush();
         entityManager.clear();
 
-        log.info("Batch insert completed successfully");
+        long duration = System.currentTimeMillis() - startTime;
+        log.info("Batch insert completed successfully in {} ms", duration);
     }
 
     List<AcademyAward> findWinnersByCategoryAndNominee(String category, String movieName) {

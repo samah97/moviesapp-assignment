@@ -5,6 +5,7 @@ import com.backbase.moviesapp.exceptions.APIException;
 import com.backbase.moviesapp.exceptions.MovieNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -18,6 +19,7 @@ import static com.backbase.moviesapp.constants.OMDBConstants.*;
 public class OmdbService {
 
     private final WebClient omdbWebClient;
+
 
     private OmdbGetMovieResponse fetchMovie(String queryParamName, String queryParamValue) {
         var response = omdbWebClient.get()
@@ -37,10 +39,12 @@ public class OmdbService {
         return handleResponse(response);
     }
 
+    @Cacheable(value = "omdb_cache", key = "#movieTitle")
     public OmdbGetMovieResponse fetchByTitle(String movieTitle) {
         return fetchMovie(TITLE_PARAM, movieTitle);
     }
 
+    @Cacheable(value = "omdb_cache", key = "#imdbId")
     public OmdbGetMovieResponse fetchById(String imdbId) {
         return fetchMovie(IMDB_ID_PARAM, imdbId);
     }

@@ -3,7 +3,7 @@ server:
 
 app:
   api:
-    token: 4ALI0J029mH6kJJI0rPxUFDfVCR
+    token: ${APP_API_TOKEN:moviesapp-token}
 
 spring:
   application:

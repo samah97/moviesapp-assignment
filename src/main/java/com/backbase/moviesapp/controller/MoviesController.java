@@ -5,6 +5,7 @@ import com.backbase.moviesapp.dtos.response.MovieRatingResponse;
 import com.backbase.moviesapp.dtos.response.MovieResponse;
 import com.backbase.moviesapp.services.MoviesService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class MoviesController {
 
     @Operation(description = "Checks if a movie has ever won an award in the input category")
     @GetMapping("/winner")
-    public ResponseEntity<MovieResponse> winner(@NotBlank @RequestParam("category") String category, @NotBlank @RequestParam("movie") String movie) {
+    public ResponseEntity<MovieResponse> winner(@Nullable @RequestParam("category") String category, @NotBlank @RequestParam("movie") String movie) {
         return ResponseEntity.ok(
                 moviesService.isWinner(category, movie)
         );
