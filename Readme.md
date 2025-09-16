@@ -18,3 +18,5 @@ team.
 - [To Do/Later improvements](to_do.md)
 - [Scale](scale.md)
 - [Diagrams](diagrams.md)
+
+### Looking forward to join the TEAM! 
